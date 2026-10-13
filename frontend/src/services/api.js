@@ -1,5 +1,7 @@
 
-const API_URL = 'http://127.0.0.1:8000/api/leads/'
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  'http://127.0.0.1:8000/api/leads/'
 
 export async function getLeads() {
   const response = await fetch(API_URL)

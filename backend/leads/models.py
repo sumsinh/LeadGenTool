@@ -28,7 +28,6 @@ class Lead(models.Model):
     def calculate_score(self):
         score = 40
 
-        # Industry relevance
         industry = self.industry.strip().lower()
         if industry == "technology":
             score += 20
@@ -37,14 +36,12 @@ class Lead(models.Model):
         else:
             score += 5
 
-        # Company size
         size = self.company_size.replace(" ", "").lower()
         if size in {"51-200", "201-500", "501-1000", "1000+"}:
             score += 15
         elif size in {"11-50", "11–50"}:
             score += 10
 
-        # Contact information
         if self.email.strip():
             score += 10
         if self.website.strip():
