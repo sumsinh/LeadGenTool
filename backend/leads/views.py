@@ -54,6 +54,18 @@ def lead_stats(request):
         "average_score": leads.aggregate(avg=Avg("score"))["avg"] or 0,
     })
 
+@api_view(["DELETE"])
+def delete_lead(request, pk):
+    try:
+        lead = Lead.objects.get(pk=pk)
+    except Lead.DoesNotExist:
+        return Response(
+            {"error": "Lead not found"},
+            status=status.HTTP_404_NOT_FOUND,
+        )
+
+    lead.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(["POST"])
 def remove_duplicates(request):

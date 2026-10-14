@@ -52,3 +52,13 @@ export async function deleteDuplicates() {
 export function exportLeads() {
   window.open(`${API_URL}export/`, '_blank')
 }
+
+export async function deleteLead(id) {
+  const response = await fetch(`${API_URL}${id}/`, {
+    method: 'DELETE',
+  })
+
+  if (!response.ok) {
+    throw new Error('Failed to delete lead')
+  }
+}
